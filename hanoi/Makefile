@@ -59,9 +59,12 @@ $(OBJDir)%.d: %.cpp
 	@set -e; if ! test -d $(@D); then mkdir -p $(@D); fi
 	gcc -MM -MT '$(patsubst %.cpp, $(OBJDir)%.o, $<) $@' $< > $@
 
+ifneq ( $(MAKECMDGOALS), $(DEFAULT_GOAL) )
+	include $(DEPS)
+endif
+
 test:
 	echo $(BUILD)$(BUILD)
 	echo $(ROOT)
 
--include $(DEPS)
 

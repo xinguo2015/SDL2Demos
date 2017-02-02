@@ -63,5 +63,7 @@ test:
 	echo $(BUILD)$(BUILD)
 	echo $(ROOT)
 
--include $(DEPS)
+ifneq ( $(MAKECMDGOALS), $(DEFAULT_GOAL) )
+	include $(DEPS)
+endif
 

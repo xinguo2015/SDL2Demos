@@ -31,7 +31,7 @@ OBJS    := $(addprefix $(OBJDir), $(OBJS))
 DEPS    := $(addprefix $(OBJDir), $(DEPS))
 
 $(TARGET) : $(OBJS) $(DEPS)
-	$(CXX) -o $(TARGET) $(OBJS) $(LIBS)
+	$(CC) -o $(TARGET) $(OBJS) $(LIBS)
 
 .PHONY : test cleanobj cleandep clean
 
@@ -63,5 +63,7 @@ test:
 	echo $(BUILD)$(BUILD)
 	echo $(ROOT)
 
--include $(DEPS)
+ifneq ( $(MAKECMDGOALS), $(DEFAULT_GOAL) )
+	include $(DEPS)
+endif
 

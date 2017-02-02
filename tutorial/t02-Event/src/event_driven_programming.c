@@ -55,9 +55,6 @@ BOOL init()
 
 BOOL loadMedia()
 {
-	//Loading success flag
-	BOOL success = TRUE; 
-	//Load splash image
 	gHelloWorld = SDL_LoadBMP( "media/hello_world.bmp" );
 	if( !gHelloWorld ) gHelloWorld = SDL_LoadBMP( "../media/hello_world.bmp" );
 	if( !gHelloWorld ) gHelloWorld = SDL_LoadBMP( "../../media/hello_world.bmp" );
@@ -66,16 +63,16 @@ BOOL loadMedia()
 	if( gHelloWorld == NULL )
 	{
 		printf( "Unable to load image %s! SDL Error: %s\n", "02_event_driven_programming/hello_world.bmp", SDL_GetError() );
-		success = FALSE;
+		return FALSE;
 	} 
-	return success;
+	return TRUE;
 }
 
 void close()
 {
 	//Deallocate surface
 	if( gHelloWorld )
-	SDL_FreeSurface( gHelloWorld );
+		SDL_FreeSurface( gHelloWorld );
 	gHelloWorld = NULL;
 
 	//Destroy window
